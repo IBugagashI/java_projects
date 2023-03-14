@@ -1,21 +1,10 @@
 /*
+
 Вычислить n-ое треугольного число(сумма чисел от 1 до n), а так же n! (произведение чисел от 1 до n)
 Ввод:5
 Треугольное число 1 + 2 + 3 + 4 + 5 = 15
 n! 1 * 2 * 3 * 4 * 5 = 120 
-1. Вывести все простые числа от 1 до 1000
 
-2. Реализовать простой калькулятор (+ - / *)
-Ввод числа ->
-Ввод знака ->
-Ввод числа ->
-
-3. *(ДОПОЛНИТЕЛЬНАЯ) +Задано уравнение вида q + w = e, q, w, e >= 0.
-Некоторые цифры могут быть заменены знаком вопроса, например 2? + ?5 = 69 (пользователь).
-Требуется восстановить выражение до верного равенства.
-Предложить хотя бы одно решение или сообщить, что его нет.
-Ввод: 2? + ?5 = 69
-Вывод: 24 + 45 = 69
 */
 package DZ;
 
@@ -27,7 +16,25 @@ public class task1 {
         Scanner iScanner = new Scanner(System.in);
         System.out.printf("Введите число n: ");
         int n = iScanner.nextInt();
+        System.out.printf("Укажите число необходимого действия\n1 - Факториал 2 - Треугольное число: ");
+        int choice = iScanner.nextInt();
         System.out.printf("Ваше число n: "+ n);
+        switch (choice) {
+            case 1:
+                System.out.printf("\nФакториал: " + factorials(n));
+                break;
+        
+            case 2:
+                System.out.printf("\nТреугольное число: " + triple_number(n));
+                break;
+        }
         iScanner.close();
     }
-}
+    public static int triple_number(int a) {
+        return (a * (a + 1)) / 2;
+    }
+    public static int factorials (int a) {
+        if(a == 1) return 1;
+        return a * factorials(a -1);
+    }
+}    
