@@ -14,23 +14,23 @@ import javax.print.event.PrintJobListener;
 public class task1 {
     public static void main(String[] args) {
         Scanner iScanner = new Scanner(System.in);
-        System.out.printf("Введите число n: ");
+        System.out.print("Введите число n: ");
         int n = iScanner.nextInt();
-        System.out.printf("Укажите число необходимого действия\n1 - Факториал 2 - Треугольное число: ");
+        System.out.print("Укажите число необходимого действия\n1 - Факториал 2 - Треугольное число: ");
         int choice = iScanner.nextInt();
-        System.out.printf("Ваше число n: "+ n);
+        System.out.print("Ваше число n: "+ n);
         switch (choice) {
             case 1:
-                System.out.printf("\nФакториал: " + factorials(n));
+                System.out.print("\nФакториал: " + factorials(n));
                 break;
         
             case 2:
-                System.out.printf("\nТреугольное число: " + triple_number(n));
+                System.out.print("\nТреугольное число: " + triangular_number(n));
                 break;
         }
         iScanner.close();
     }
-    public static int triple_number(int a) {
+    public static int triangular_number(int a) {
         return (a * (a + 1)) / 2;
     }
     public static int factorials (int a) {
