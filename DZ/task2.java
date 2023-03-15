@@ -1,12 +1,11 @@
 /*
 
-1. Вывести все простые числа от 1 до 1000
+Вывести все простые числа от 1 до 1000
 
  */
 
 package DZ;
 
-import java.text.BreakIterator;
 import java.util.Scanner;
 
 public class task2 {

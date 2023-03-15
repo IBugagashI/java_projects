@@ -9,7 +9,6 @@ n! 1 * 2 * 3 * 4 * 5 = 120
 package DZ;
 
 import java.util.Scanner;
-import javax.print.event.PrintJobListener;
 
 public class task1 {
     public static void main(String[] args) {
