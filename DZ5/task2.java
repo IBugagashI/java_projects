@@ -1,84 +1,79 @@
+/*
+ * 
+Написать программу, которая найдет и выведет повторяющиеся
+имена с количеством повторений.
+Отсортировать по убыванию популярности Имени.
+ * 
+ */
+
 package DZ5;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
 
 public class task2 {
     public static void main(String[] args) {
-        Map<String, List<String>> phonBook = new HashMap<>();
-        phonBook.put("Lena", List.of("8 926 333 33 33", "8 926 222 22 99"));
-        phonBook.put("Ira", List.of("8 926 333 33 55", "8 926 222 22 00"));
-        phonBook.put("Igor", List.of("8 926 333 33 66", "8 926 222 22 44"));
-        phonBook.put("Petr", List.of("8 926 333 33 77", "8 926 222 22 11"));
-        phonBook.put("Dima", List.of("8 926 333 33 88", "8 926 222 22 22"));
-
-        menu(phonBook);
-
+        List<String> NameArr = List.of("Иван Иванов", 
+        "Светлана Петрова", 
+        "Кристина Белова", 
+        "Анна Мусина", 
+        "Анна Крутова", 
+        "Иван Юрин", 
+        "Петр Лыков", 
+        "Павел Чернов", 
+        "Петр Чернышов",
+        "Мария Федорова",
+        "Марина Светлова",
+        "Мария Савина",
+        "Мария Рыкова",
+        "Марина Лугова",
+        "Анна Владимирова",
+        "Иван Мечников",
+        "Петр Петин",
+        "Иван Ежов"); 
+        System.out.println(Count(Name(NameArr)));
     }
 
-    public static String scanner() {
-        Scanner scanner = new Scanner(System.in);
-        String scan = scanner.nextLine();
-        // scanner.close();
-        return scan;
-    }
+    //TreeMap<String, Integer> tMap = new TreeMap<>();
 
-    public static void find(Map<String, List<String>> phonBook) {
-        System.out.println("Введите имя: ");
-        String name = scanner();
-        System.out.println(phonBook.get(name));
-    }
-
-    public static void allBook(Map<String, List<String>> phonBook) {
-        System.out.println(phonBook);
-
-    }
-
-    public static Map<String, List<String>> add(Map<String, List<String>> phonBook) {
-        System.out.println("Если хотите выйте хотите перестать вводить номера введите 'stop'");
-        System.out.println("Введите имя: ");
-        String name = scanner();
-        List<String> number = new ArrayList<>();
-        while (true) {
-            System.out.println("Введите номер: ");
-            String phon = scanner();
-            if (phon.equals("stop")) {
-                break;
-            } else {
-                number.add(phon);
-            }
+    public static List<String> Name(List<String> list){
+        List<String> name = new ArrayList<>();
+        for(String i: list){
+            String[] step = i.split(" ");
+            name.add(step[0]);
         }
-        phonBook.put(name, number);
-
-        return phonBook;
+        return name;
     }
-
-    public static Map<String, List<String>> menu(Map<String, List<String>> phonBook) {
-        System.out.println(
-                "Введите команду из списка: find - найти контакт, add - добавить контакт, all - показать всю телефонную книгу, exit - выйти");
-        while (true) {
-            String comands = scanner();
-            if (comands.equals("exit")) {
-                break;
-            } else {
-                switch (comands) {
-                    case "find":
-                        find(phonBook);
-                        break;
-                    case "add":
-                        add(phonBook);
-                        break;
-                    case "all":
-                        allBook(phonBook);
-                        break;
-                    default:
-                        break;
-                }
-            }
+   
+    public static Map<String, Integer> Count(List<String> list){
+        Map<String, Integer> CountMap = new HashMap<>();
+        for(String i: list){
+            if (CountMap.containsKey(i)) {
+                CountMap.put(i, CountMap.get(i) + 1);
+              } else {
+                CountMap.put(i, 1);
+              }
         }
-        return phonBook;
+        
+        //не понимаю как, но работает
+        CountMap = CountMap.entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                    .collect(Collectors.toMap(
+                                        Map.Entry::getKey,
+                                        Map.Entry::getValue,
+                                        (oldValue, newValue) -> oldValue, //не понятно. Перестановка значений ни на что не влияет, но это работает
+                                        LinkedHashMap::new
+                    ));
+
+        return CountMap;
     }
 }
