@@ -70,7 +70,7 @@ public class task2 {
                     .collect(Collectors.toMap(
                                         Map.Entry::getKey,
                                         Map.Entry::getValue,
-                                        (oldValue, newValue) -> oldValue, //не понятно. Перестановка значений ни на что не влияет, но это работает
+                                        (oldValue, newValue) -> oldValue,
                                         LinkedHashMap::new
                     ));
 
